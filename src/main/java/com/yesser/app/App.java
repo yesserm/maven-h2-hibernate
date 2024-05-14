@@ -1,6 +1,8 @@
 package com.yesser.app;
 
 import com.yesser.app.entity.Student;
+import com.yesser.app.services.GenericServiceImpl;
+import com.yesser.app.services.IGenericService;
 import com.yesser.app.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -24,25 +26,14 @@ public class App
     }
 
     private static List<Student> getStudents() {
-        Transaction transaction = null;
         List<Student> students = new ArrayList<>();
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            students = session.createQuery("from student",
-                    Student.class).list();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        IGenericService<Student> studentSevice = new GenericServiceImpl<>(Student.class, HibernateUtil.getSessionFactory());
+        students = studentSevice.getAll();
         return students;
     }
 
     private static void saveStudent(Student student) {
-        Transaction transaction = null;
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
-            transaction = session.beginTransaction();
-            session.save(student);
-            transaction.commit();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        IGenericService<Student> studentService = new GenericServiceImpl<>(Student.class, HibernateUtil.getSessionFactory());
+        studentService.save(student);
     }
 }

@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Table
-@Entity(name = "student")
+@Entity(name = "Student")
 public class Student{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
