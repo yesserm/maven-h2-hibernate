@@ -18,5 +18,8 @@
         <property name="hibernate.dbcp.minIdle">5</property>
         <property name="hibernate.dbcp.maxWaitMillis">-1</property>
         <mapping class="com.yesser.app.entity.Student" />
+        <mapping class="com.yesser.app.entity.Supplier" />
+        <mapping class="com.yesser.app.entity.Product" />
+        <mapping class="com.yesser.app.entity.Software" />
     </session-factory>
 </hibernate-configuration>
